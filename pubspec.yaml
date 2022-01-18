@@ -53,6 +53,7 @@ flutter_icons:
   image_path: "assets/icon.png"
 flutter_native_splash:
   background_image: "assets/BG.png"
+  image: assets/logo.png
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
