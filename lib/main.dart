@@ -1,3 +1,5 @@
+// ignore: unused_import
+// ignore: unnecessary_import
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,8 +15,62 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          textTheme: const TextTheme(
+              headline1: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Colors.black),
+              headline2: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 25,
+                  fontWeight: FontWeight.w600),
+              headline3: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w100,
+                  fontSize: 25),
+              headline4: TextStyle(
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w200,
+                fontSize: 25,
+              ),
+              headline5: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w300,
+                  fontSize: 25),
+              headline6: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 25),
+              subtitle1: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20),
+              subtitle2: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20),
+              bodyText1: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20),
+              bodyText2: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20),
+              caption: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20),
+              button: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20),
+              overline: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20))),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -30,11 +86,11 @@ class MyHomePage extends StatefulWidget {
   // This class is the configuration for the state. It holds the values (in this
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".                 
+  // always marked "final".
 
   final String title;
 
-  @override                                         
+  @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
