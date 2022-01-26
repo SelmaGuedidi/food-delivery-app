@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/login_via_email.dart';
 
-class create_an_account extends StatelessWidget {
+class CreateAnAccount extends StatefulWidget {
+  @override
+  State<CreateAnAccount> createState() => _CreateAnAccountState();
+}
+
+class _CreateAnAccountState extends State<CreateAnAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +83,7 @@ class create_an_account extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (Context) => login_via_email(),
+                      builder: (Context) => LoginViaEmail(),
                     ),
                   );
                 },

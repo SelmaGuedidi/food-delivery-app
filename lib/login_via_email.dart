@@ -2,7 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:fooddelivery/create_an_account.dart';
 import 'package:fooddelivery/forgot_password.dart';
 
-class login_via_email extends StatelessWidget {
+class LoginViaEmail extends StatefulWidget {
+  const LoginViaEmail({Key? key}) : super(key: key);
+
+  @override
+  State<LoginViaEmail> createState() => LoginViaEmailState();
+}
+
+class LoginViaEmailState extends State<LoginViaEmail> {
+  final _formKey = GlobalKey<FormState>();
+
+  final emailController=TextEditingController();
+  final passwordController=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +27,9 @@ class login_via_email extends StatelessWidget {
           toolbarHeight: 70,
           backgroundColor: Colors.white,
         ),
-        body: ListView(
+        body: Form(
+            key: _formKey,
+            child: ListView(
           children: [
             const Padding(
                 padding: EdgeInsets.only(
@@ -29,7 +43,17 @@ class login_via_email extends StatelessWidget {
                     right: 30.0, left: 30.00, bottom: 15.00),
                 child: Column(children: [
                   TextFormField(
+                    controller: emailController,
+                      textInputAction:TextInputAction.next ,
                       keyboardType: TextInputType.emailAddress,
+                      validator: (value){
+                        if(value==null || value.isEmpty){
+                          return "Invalid email";
+                        }else{
+                          return null;
+                        }
+
+                      },
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.email),
                           labelText: 'Email',
@@ -37,8 +61,27 @@ class login_via_email extends StatelessWidget {
                               borderRadius: BorderRadius.circular(18.0)))),
                   const SizedBox(height: 20),
                   TextFormField(
+                    controller: passwordController,
+                      textInputAction:TextInputAction.done ,
+
+                      onFieldSubmitted: (value){
+                        if(_formKey.currentState!.validate()){
+
+                          print("Email: "+ emailController.text);
+                          print("Password: "+ passwordController.text);
+
+                        }
+                      },
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
+                      validator: (value){
+                        if(value==null || value.isEmpty){
+                          return "Invalid password";
+                        }else{
+                          return null;
+                        }
+
+                      },
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.lock),
                           labelText: 'Password',
@@ -47,10 +90,17 @@ class login_via_email extends StatelessWidget {
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => forgot_password()));
+
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ForgotPassword()));
+
+
+
+
+
                         },
                         child: Text(
                           'Forgot password ?',
@@ -63,7 +113,15 @@ class login_via_email extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     right: 30.0, left: 30.00, bottom: 15.00),
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()){
+
+                      print("Email: "+ emailController.text);
+                      print("Password: "+ passwordController.text);
+
+                    }
+
+                  },
                   color: const Color.fromRGBO(240, 81, 147, 1),
                   padding: const EdgeInsets.all(10.0),
                   shape: RoundedRectangleBorder(
@@ -80,7 +138,7 @@ class login_via_email extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (Context) => create_an_account(),
+                        builder: (Context) => CreateAnAccount(),
                       ),
                     );
                   },
@@ -95,6 +153,6 @@ class login_via_email extends StatelessWidget {
                       )),
                 )),
           ],
-        ));
+        )));
   }
 }

@@ -101,7 +101,7 @@ class login extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (Context) => login_via_email(),
+                      builder: (Context) => LoginViaEmail(),
                     ),
                   );
                 },
@@ -132,7 +132,7 @@ class login extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (Context) => create_an_account()),
+                  MaterialPageRoute(builder: (Context) => CreateAnAccount()),
                 );
               },
               color: Colors.white,
