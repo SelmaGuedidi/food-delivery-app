@@ -6,6 +6,9 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  final _formKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,30 +29,51 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ))),
-          Padding(
-            padding:
-                const EdgeInsets.only(right: 30.0, left: 30.00, bottom: 15.00),
-            child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.email),
-                    labelText: 'Email',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18.0)))),
-          ),
-          Padding(
-              padding: const EdgeInsets.only(
-                  right: 30.0, left: 30.00, bottom: 15.00, top: 30),
-              child: MaterialButton(
-                onPressed: () {},
-                color: const Color.fromRGBO(240, 81, 147, 1),
-                padding: const EdgeInsets.all(10.0),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)),
-                height: 55,
-                child:
-                    const Text('Reset', style: TextStyle(color: Colors.white)),
-              )),
+          Form(
+              key: _formKey,
+              child: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 30.0, left: 30.00, bottom: 15.00),
+                  child: TextFormField(
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Invalid email";
+                        } else {
+                          return null;
+                        }
+                      },
+                      onFieldSubmitted: (value) {
+                        if (_formKey.currentState!.validate()) {
+                          print("Email: " + emailController.text);
+                        }
+                      },
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.email),
+                          labelText: 'Email',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18.0)))),
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(
+                        right: 30.0, left: 30.00, bottom: 15.00, top: 30),
+                    child: MaterialButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          print("Email: " + emailController.text);
+                        }
+                      },
+                      color: const Color.fromRGBO(240, 81, 147, 1),
+                      padding: const EdgeInsets.all(10.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0)),
+                      height: 55,
+                      child: const Text('Reset',
+                          style: TextStyle(color: Colors.white)),
+                    )),
+              ]))
         ]));
   }
 }

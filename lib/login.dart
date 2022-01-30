@@ -81,13 +81,13 @@ class login extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    const Image(
+                    Image(
                       image: AssetImage('assets/Login_screen/AppleLogo.png'),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 10.0,
                     ),
-                    const Text('Login via Apple',
+                    Text('Login via Apple',
                         style: TextStyle(
                           color: Colors.white,
                         )),

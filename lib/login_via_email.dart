@@ -12,8 +12,8 @@ class LoginViaEmail extends StatefulWidget {
 class LoginViaEmailState extends State<LoginViaEmail> {
   final _formKey = GlobalKey<FormState>();
 
-  final emailController=TextEditingController();
-  final passwordController=TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,129 +30,132 @@ class LoginViaEmailState extends State<LoginViaEmail> {
         body: Form(
             key: _formKey,
             child: ListView(
-          children: [
-            const Padding(
-                padding: EdgeInsets.only(
-                    right: 15.0, left: 15.00, bottom: 30.00, top: 30),
-                child: Text('Input your credentials',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ))),
-            Padding(
-                padding: const EdgeInsets.only(
-                    right: 30.0, left: 30.00, bottom: 15.00),
-                child: Column(children: [
-                  TextFormField(
-                    controller: emailController,
-                      textInputAction:TextInputAction.next ,
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value){
-                        if(value==null || value.isEmpty){
-                          return "Invalid email";
-                        }else{
-                          return null;
-                        }
-
+              children: [
+                const Padding(
+                    padding: EdgeInsets.only(
+                        right: 15.0, left: 15.00, bottom: 30.00, top: 30),
+                    child: Text('Input your credentials',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ))),
+                Form(
+                    key: _formKey,
+                    child: Column(children: [
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              right: 30.0, left: 30.00, bottom: 15.00),
+                          child: Column(children: [
+                            TextFormField(
+                                controller: emailController,
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.emailAddress,
+                                onFieldSubmitted: (value) {
+                                  if (_formKey.currentState!.validate()) {
+                                    print("Email: " + emailController.text);
+                                    print(
+                                        "Password: " + passwordController.text);
+                                  }
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Invalid email";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                    prefixIcon: const Icon(Icons.email),
+                                    labelText: 'Email',
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0)))),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                                controller: passwordController,
+                                textInputAction: TextInputAction.done,
+                                onFieldSubmitted: (value) {
+                                  if (_formKey.currentState!.validate()) {
+                                    print("Email: " + emailController.text);
+                                    print(
+                                        "Password: " + passwordController.text);
+                                  }
+                                },
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Invalid password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                    prefixIcon: const Icon(Icons.lock),
+                                    labelText: 'Password',
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0)))),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ForgotPassword()));
+                                      },
+                                      child: Text(
+                                        'Forgot password ?',
+                                        style:
+                                            TextStyle(color: Colors.blue[200]),
+                                      ))
+                                ]),
+                            const SizedBox(height: 30),
+                          ])),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              right: 30.0, left: 30.00, bottom: 15.00),
+                          child: MaterialButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                print("Email: " + emailController.text);
+                                print("Password: " + passwordController.text);
+                              }
+                            },
+                            color: const Color.fromRGBO(240, 81, 147, 1),
+                            padding: const EdgeInsets.all(10.0),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0)),
+                            height: 55,
+                            child: const Text('Login',
+                                style: TextStyle(color: Colors.white)),
+                          )),
+                    ])),
+                Padding(
+                    padding: const EdgeInsets.only(
+                        right: 30.0, left: 30.00, bottom: 15.00),
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (Context) => CreateAnAccount(),
+                          ),
+                        );
                       },
-                      decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.email),
-                          labelText: 'Email',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18.0)))),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: passwordController,
-                      textInputAction:TextInputAction.done ,
-
-                      onFieldSubmitted: (value){
-                        if(_formKey.currentState!.validate()){
-
-                          print("Email: "+ emailController.text);
-                          print("Password: "+ passwordController.text);
-
-                        }
-                      },
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      validator: (value){
-                        if(value==null || value.isEmpty){
-                          return "Invalid password";
-                        }else{
-                          return null;
-                        }
-
-                      },
-                      decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock),
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18.0)))),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    TextButton(
-                        onPressed: () {
-
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ForgotPassword()));
-
-
-
-
-
-                        },
-                        child: Text(
-                          'Forgot password ?',
-                          style: TextStyle(color: Colors.blue[200]),
-                        ))
-                  ]),
-                  const SizedBox(height: 30),
-                ])),
-            Padding(
-                padding: const EdgeInsets.only(
-                    right: 30.0, left: 30.00, bottom: 15.00),
-                child: MaterialButton(
-                  onPressed: () {
-                    if(_formKey.currentState!.validate()){
-
-                      print("Email: "+ emailController.text);
-                      print("Password: "+ passwordController.text);
-
-                    }
-
-                  },
-                  color: const Color.fromRGBO(240, 81, 147, 1),
-                  padding: const EdgeInsets.all(10.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0)),
-                  height: 55,
-                  child: const Text('Login',
-                      style: TextStyle(color: Colors.white)),
-                )),
-            Padding(
-                padding: const EdgeInsets.only(
-                    right: 30.0, left: 30.00, bottom: 15.00),
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (Context) => CreateAnAccount(),
-                      ),
-                    );
-                  },
-                  color: Colors.white,
-                  padding: const EdgeInsets.all(10.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0)),
-                  height: 55,
-                  child: const Text('Create an account instead',
-                      style: TextStyle(
-                        color: Colors.black,
-                      )),
-                )),
-          ],
-        )));
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(10.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0)),
+                      height: 55,
+                      child: const Text('Create an account instead',
+                          style: TextStyle(
+                            color: Colors.black,
+                          )),
+                    )),
+              ],
+            )));
   }
 }
