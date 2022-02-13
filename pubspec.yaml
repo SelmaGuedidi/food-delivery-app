@@ -61,6 +61,7 @@ flutter_native_splash:
 flutter:
   assets:
     - assets/Login_screen/
+    - assets/home_screen/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
