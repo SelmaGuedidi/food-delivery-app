@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooddelivery/food_menu_screen.dart';
 import 'package:fooddelivery/login_via_email.dart';
 
 class CreateAnAccount extends StatefulWidget {
@@ -133,7 +134,13 @@ class _CreateAnAccountState extends State<CreateAnAccount> {
                   if (_formKey.currentState!.validate()) {
                     print("Email: " + emailController.text);
                     print("Password: " + passwordController.text);
-                  }
+                  } 
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (Context) =>  FoodMenu(),
+                      ),
+                    );
                 },
                 color: const Color.fromRGBO(240, 81, 147, 1),
                 padding: const EdgeInsets.all(10.0),

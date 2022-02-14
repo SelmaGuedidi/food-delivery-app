@@ -152,5 +152,6 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                 )),
           ],
         ));
+      
   }
 }
