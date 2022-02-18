@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/create_an_account.dart';
 import 'package:fooddelivery/forgot_password.dart';
+import 'package:fooddelivery/home.dart';
 
 class LoginViaEmail extends StatefulWidget {
   const LoginViaEmail({Key? key}) : super(key: key);
@@ -119,6 +120,11 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                       print("Email: " + emailController.text);
                       print("Password: " + passwordController.text);
                     }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (Context) => Home(),
+                        ));
                   },
                   color: const Color.fromRGBO(240, 81, 147, 1),
                   padding: const EdgeInsets.all(10.0),
