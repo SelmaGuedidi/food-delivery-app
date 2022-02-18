@@ -15,6 +15,7 @@ class LoginViaEmailState extends State<LoginViaEmail> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool visiblePassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +49,6 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                             controller: emailController,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.emailAddress,
-                            onFieldSubmitted: (value) {
-                              if (_formKey.currentState!.validate()) {
-                                print("Email: " + emailController.text);
-                                print("Password: " + passwordController.text);
-                              }
-                            },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "Invalid email";
@@ -71,14 +66,8 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                         TextFormField(
                             controller: passwordController,
                             textInputAction: TextInputAction.done,
-                            onFieldSubmitted: (value) {
-                              if (_formKey.currentState!.validate()) {
-                                print("Email: " + emailController.text);
-                                print("Password: " + passwordController.text);
-                              }
-                            },
                             keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
+                            obscureText: visiblePassword ? false : true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "Invalid password";
@@ -88,6 +77,15 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                             },
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                    icon: Icon(visiblePassword
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined),
+                                    onPressed: () {
+                                      setState(() {
+                                        visiblePassword = !visiblePassword;
+                                      });
+                                    }),
                                 labelText: 'Password',
                                 border: OutlineInputBorder(
                                     borderRadius:
@@ -158,6 +156,5 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                 )),
           ],
         ));
-      
   }
 }

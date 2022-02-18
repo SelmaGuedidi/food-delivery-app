@@ -45,11 +45,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           return null;
                         }
                       },
-                      onFieldSubmitted: (value) {
-                        if (_formKey.currentState!.validate()) {
-                          print("Email: " + emailController.text);
-                        }
-                      },
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.email),
                           labelText: 'Email',

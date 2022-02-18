@@ -7,6 +7,7 @@ class CreateAnAccount extends StatefulWidget {
 }
 
 class _CreateAnAccountState extends State<CreateAnAccount> {
+  bool visiblePassword = false;
   final _formKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
@@ -48,11 +49,6 @@ class _CreateAnAccountState extends State<CreateAnAccount> {
                               return null;
                             }
                           },
-                          onFieldSubmitted: (value) {
-                            if (_formKey.currentState!.validate()) {
-                              print("Name: " + nameController.text);
-                            }
-                          },
                           decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.person),
                               labelText: 'Name',
@@ -67,11 +63,6 @@ class _CreateAnAccountState extends State<CreateAnAccount> {
                               return "Invalid email";
                             } else {
                               return null;
-                            }
-                          },
-                          onFieldSubmitted: (value) {
-                            if (_formKey.currentState!.validate()) {
-                              print("Email: " + emailController.text);
                             }
                           },
                           decoration: InputDecoration(
@@ -90,12 +81,6 @@ class _CreateAnAccountState extends State<CreateAnAccount> {
                               return null;
                             }
                           },
-                          onFieldSubmitted: (value) {
-                            if (_formKey.currentState!.validate()) {
-                              print(
-                                  "phoneNumber: " + phoneNumberController.text);
-                            }
-                          },
                           decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.phone),
                               labelText: 'Phone No.',
@@ -112,14 +97,18 @@ class _CreateAnAccountState extends State<CreateAnAccount> {
                               return null;
                             }
                           },
-                          onFieldSubmitted: (value) {
-                            if (_formKey.currentState!.validate()) {
-                              print("Password: " + passwordController.text);
-                            }
-                          },
-                          obscureText: true,
+                          obscureText: visiblePassword ? false : true,
                           decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                  icon: Icon(visiblePassword
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined),
+                                  onPressed: () {
+                                    setState(() {
+                                      visiblePassword = !visiblePassword;
+                                    });
+                                  }),
                               labelText: 'Password',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(18.0)))),
