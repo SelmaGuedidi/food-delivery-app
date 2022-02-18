@@ -1,19 +1,19 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
 class FoodMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.white,
-          toolbarHeight: 190,
+          toolbarHeight: 180,
           flexibleSpace: const Image(
-            // height: 220,
             image: AssetImage('assets/food_menu_screen/food_menu.png'),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
           automaticallyImplyLeading: false,
           title: Column(
@@ -22,14 +22,16 @@ class FoodMenu extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const IconButton(
-                      onPressed :null,
-                      icon: Icon(
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
                         Icons.arrow_back_sharp,
                         color: Colors.white,
                       )),
-                  const SizedBox(
-                    width: 180,
+                  SizedBox(
+                    width: isPortrait ? width * 0.428 : width * 0.7,
                   ),
                   const IconButton(
                       onPressed: null,

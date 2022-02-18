@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooddelivery/food_menu_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -185,13 +186,25 @@ class HomeState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Stack(children: [
-                            Image(
-                              image: AssetImage('assets/home_screen/Deal1.png'),
-                              fit: BoxFit.fill,
-                              filterQuality: FilterQuality.high,
-                              width: !isPortrait ? width * 0.91 : width * 0.85,
-                              height: !isPortrait ? height * 0.5 : height * 0.2,
-                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FoodMenu(),
+                                    ),
+                                  );
+                                },
+                                child: Image(
+                                  image: AssetImage(
+                                      'assets/home_screen/Deal1.png'),
+                                  fit: BoxFit.fill,
+                                  filterQuality: FilterQuality.high,
+                                  width:
+                                      !isPortrait ? width * 0.91 : width * 0.85,
+                                  height:
+                                      !isPortrait ? height * 0.5 : height * 0.2,
+                                )),
                             Positioned(
                                 right: 0,
                                 child: Image(
