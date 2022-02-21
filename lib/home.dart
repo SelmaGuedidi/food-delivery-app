@@ -1,4 +1,6 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:fooddelivery/cart.dart';
 import 'package:fooddelivery/food_menu_screen.dart';
 
 class Home extends StatefulWidget {
@@ -460,11 +462,24 @@ class HomeState extends State<Home> {
             height: 30,
           ),
         ]),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.shopping_cart_outlined),
-          backgroundColor: const Color.fromRGBO(240, 81, 147, 1),
-        ),
+        floatingActionButton: Badge(
+            padding: EdgeInsets.all(8),
+            badgeColor: Colors.black,
+            badgeContent: Text(
+              "4",
+              style: TextStyle(color: Colors.white, fontSize: 15),
+            ),
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (Context) => Cart(),
+                    ));
+              },
+              child: const Icon(Icons.shopping_cart_outlined),
+              backgroundColor: const Color.fromRGBO(240, 81, 147, 1),
+            )),
         bottomNavigationBar: BottomNavigationBar(
           fixedColor: const Color.fromRGBO(240, 81, 147, 1),
           type: BottomNavigationBarType.fixed,
