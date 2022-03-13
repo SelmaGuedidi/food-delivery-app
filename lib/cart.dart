@@ -38,18 +38,18 @@ class _CartState extends State<Cart> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                    padding: EdgeInsetsDirectional.only(
+                    padding: const EdgeInsetsDirectional.only(
                       start: 24,
                       top: 24,
                     ),
                     child: Badge(
-                      padding: EdgeInsets.all(7),
+                      padding: const EdgeInsets.all(7),
                       badgeColor: Colors.black,
-                      badgeContent: Text(
+                      badgeContent: const Text(
                         "1",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
-                      child: Image(
+                      child: const Image(
                         image: AssetImage('assets/food_menu_screen/pizza.png'),
                         fit: BoxFit.cover,
                         height: 64,
@@ -58,7 +58,7 @@ class _CartState extends State<Cart> {
                     )),
                 Expanded(
                     child: Padding(
-                  padding: EdgeInsetsDirectional.only(
+                  padding: const EdgeInsetsDirectional.only(
                     start: 16,
                     top: 23,
                   ),
@@ -66,18 +66,19 @@ class _CartState extends State<Cart> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Chicken Fajita Pizza",
                         style: TextStyle(fontWeight: FontWeight.w600),
                       ),
                       Row(children: [
                         Container(
-                            padding: EdgeInsetsDirectional.only(top: 4),
-                            child: Text("10'' Char Donay",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.grey))),
-                        SizedBox(width: !isPortrait ? 410 : 80),
+                          padding: const EdgeInsetsDirectional.only(top: 4),
+                          child: Text("10'' Char Donay",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.grey)),
+                        ),
+                        Spacer(),
                         IconButton(
                             onPressed: null,
                             icon: Image(
@@ -140,7 +141,7 @@ class _CartState extends State<Cart> {
                                   fontWeight: FontWeight.w300,
                                   color: Colors.grey)),
                         ),
-                        SizedBox(width: !isPortrait ? 500 : 170),
+                        Spacer(),
                         IconButton(
                             onPressed: null,
                             icon: Image(
@@ -205,27 +206,30 @@ class _CartState extends State<Cart> {
                                       })),
                             ]),
                             SizedBox(height: 10),
-                            Row(children: [
-                              Text('Red Grape Margarita',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black,
-                                      fontSize: 18)),
-                              SizedBox(width: isPortrait ? 100 : 380),
-                              IconButton(
-                                onPressed: null,
-                                icon: Icon(
-                                  Icons.add,
-                                ),
-                              )
-                            ]),
+                            Container(
+                              width: width - 60,
+                              child: Row(children: [
+                                Text('Red Grape Margarita',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                        fontSize: 18)),
+                                Spacer(),
+                                IconButton(
+                                  onPressed: null,
+                                  icon: Icon(
+                                    Icons.add,
+                                  ),
+                                )
+                              ]),
+                            ),
                             Text(
                               'Daily Deli',
                               style: TextStyle(fontSize: 16),
                             )
                           ])),
                   Padding(
-                      padding: const EdgeInsets.only(left: 80),
+                      padding: const EdgeInsets.only(left: 50, right: 20),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -235,7 +239,8 @@ class _CartState extends State<Cart> {
                                     AssetImage('assets/cart_screen/Img2.png'),
                                 fit: BoxFit.fill,
                                 filterQuality: FilterQuality.high,
-                                width: !isPortrait ? width * 0.9 : width * 0.9,
+                                width:
+                                    !isPortrait ? width * 0.91 : width * 0.87,
                                 height:
                                     !isPortrait ? height * 0.5 : height * 0.2,
                               ),
@@ -262,19 +267,22 @@ class _CartState extends State<Cart> {
                                       }))
                             ]),
                             const SizedBox(height: 10),
-                            Row(children: [
-                              Text(
-                                'Lemon Pina',
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(width: isPortrait ? 210 : 580),
-                              IconButton(
-                                onPressed: null,
-                                icon: Icon(
-                                  Icons.add,
+                            Container(
+                              width: width - 50,
+                              child: Row(children: [
+                                Text(
+                                  'Lemon Pina',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
-                              )
-                            ]),
+                                Spacer(),
+                                IconButton(
+                                  onPressed: null,
+                                  icon: Icon(
+                                    Icons.add,
+                                  ),
+                                )
+                              ]),
+                            ),
                             const Text(
                               'Arfan Juices',
                               style: TextStyle(fontSize: 16),
@@ -294,13 +302,6 @@ class _CartState extends State<Cart> {
                 child: TextFormField(
                     controller: textController,
                     textInputAction: TextInputAction.done,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Invalid coupon";
-                      } else {
-                        return null;
-                      }
-                    },
                     decoration: InputDecoration(
                         suffixIcon: const Icon(Icons.arrow_right_alt_outlined),
                         border: OutlineInputBorder(
@@ -308,53 +309,69 @@ class _CartState extends State<Cart> {
               ),
             ),
             SizedBox(height: 20),
-            Row(children: [
-              Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 20),
-                  child: Text('Subtotal',
-                      style: TextStyle(fontWeight: FontWeight.bold))),
-              SizedBox(width: !isPortrait ? 550 : 200),
-              Text('\$50',
-                  style: TextStyle(
-                    color: const Color.fromRGBO(240, 81, 147, 1),
-                  ))
-            ]),
+            Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
+                child: Row(children: [
+                  Expanded(
+                    flex: 7,
+                    child: Text('Subtotal',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  Expanded(
+                    child: Text('\$50',
+                        style: TextStyle(
+                          color: const Color.fromRGBO(240, 81, 147, 1),
+                        )),
+                  )
+                ])),
             Divider(),
-            Row(children: [
-              Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 20),
-                  child: Text('Delivery Fee',
-                      style: TextStyle(fontWeight: FontWeight.bold))),
-              SizedBox(width: !isPortrait ? 515 : 165),
-              Text('\$10',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ))
-            ]),
+            Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
+                child: Row(children: [
+                  Expanded(
+                    flex: 7,
+                    child: Text('Delivery Fee',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  Expanded(
+                    child: Text('\$10',
+                        style: TextStyle(
+                          color: Colors.grey,
+                        )),
+                  )
+                ])),
             Divider(),
-            Row(children: [
-              Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 20),
-                  child: Text('Vat',
-                      style: TextStyle(fontWeight: FontWeight.bold))),
-              SizedBox(width: !isPortrait ? 610 : 255),
-              Text('\$4',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ))
-            ]),
+            Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
+                child: Row(children: [
+                  Expanded(
+                    flex: 7,
+                    child: Text('Vat',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  Expanded(
+                    child: Text('\$4',
+                        style: TextStyle(
+                          color: Colors.grey,
+                        )),
+                  )
+                ])),
             Divider(),
-            Row(children: [
-              Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 20),
-                  child: Text('Coupon',
-                      style: TextStyle(fontWeight: FontWeight.bold))),
-              SizedBox(width: !isPortrait ? 560 : 200),
-              Text('-\$4',
-                  style: TextStyle(
-                    color: Colors.green,
-                  ))
-            ]),
+            Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
+                child: Row(children: [
+                  Expanded(
+                    flex: 7,
+                    child: Text('Coupon',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  Expanded(
+                    child: Text('-\$4',
+                        style: TextStyle(
+                          color: Colors.green,
+                        )),
+                  )
+                ])),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
               child: Row(children: [
