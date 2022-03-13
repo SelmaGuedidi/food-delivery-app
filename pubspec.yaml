@@ -34,6 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  badges: ^2.0.2
 
 dev_dependencies:
   flutter_native_splash: ^2.0.2
@@ -63,6 +64,8 @@ flutter:
     - assets/Login_screen/
     - assets/food_menu_screen/
     - assets/home_screen/
+    - assets/cart_screen/
+    - assets/thank_you_screen/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
