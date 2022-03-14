@@ -140,9 +140,6 @@ class _FoodVariationState extends State<FoodVariation> {
           Divider(
             thickness: 5,
           ),
-          SizedBox(
-            height: 10,
-          ),
           Padding(
               padding: EdgeInsets.all(20),
               child: Text('Quantity',
@@ -327,6 +324,9 @@ class _FoodVariationState extends State<FoodVariation> {
           Divider(
             thickness: 5,
           ),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
             padding:
                 const EdgeInsetsDirectional.only(top: 10, start: 15, end: 15),
@@ -342,6 +342,9 @@ class _FoodVariationState extends State<FoodVariation> {
                       ),
                     )
                   ],
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 DropdownButton<String>(
                   isExpanded: true,
@@ -371,7 +374,7 @@ class _FoodVariationState extends State<FoodVariation> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -402,6 +405,7 @@ class _FoodVariationState extends State<FoodVariation> {
                     )
                   ],
                 ),
+                SizedBox(height: 30)
               ],
             ),
           ),

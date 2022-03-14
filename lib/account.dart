@@ -17,6 +17,10 @@ class _AccountState extends State<Account> {
   final phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black),
@@ -34,9 +38,9 @@ class _AccountState extends State<Account> {
               children: [
                 Positioned(child: Image.asset('assets/home_screen/Avatar.png')),
                 Positioned(
-                    bottom: -10,
-                    right: 140,
-                    child: Image.asset('assets/home_screen/Button.png'))
+                    right: isPortrait ? 140 : 350,
+                    bottom: 0,
+                    child: Image.asset('assets/home_screen/Button.png')),
               ]),
           SizedBox(
             height: 50,
