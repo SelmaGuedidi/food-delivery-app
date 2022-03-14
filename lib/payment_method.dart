@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/credit_card_brand.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class PaymentMethod extends StatefulWidget {

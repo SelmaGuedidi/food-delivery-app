@@ -166,7 +166,7 @@ class _MyReviewsState extends State<MyReviews> {
                           onPressed: () {
                             setState(() {
                               star1 = true;
-                              star2 = star3 = star4 = false;
+                              star2 = star3 = star4 = star5 = false;
                             });
                           },
                           icon: Icon(Icons.star,

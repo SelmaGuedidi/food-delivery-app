@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:fooddelivery/profile.dart';
 
 class DailyDeli extends StatefulWidget {
   const DailyDeli({Key? key}) : super(key: key);
