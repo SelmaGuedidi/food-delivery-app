@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fooddelivery/account.dart';
+import 'package:fooddelivery/my_orders.dart';
+import 'package:fooddelivery/my_reviews.dart';
+import 'package:fooddelivery/payment_method.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -35,54 +39,96 @@ class _ProfileState extends State<Profile> {
             SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                Expanded(child: Icon(Icons.account_circle_outlined)),
-                Expanded(flex: 7, child: Text("Account")),
-                Expanded(
-                    child: IconButton(
-                        onPressed: null, icon: Icon(Icons.arrow_forward)))
-              ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Account(),
+                  ),
+                );
+              },
+              child: Row(
+                children: [
+                  Expanded(child: Icon(Icons.account_circle_outlined)),
+                  Expanded(flex: 7, child: Text("Account")),
+                  Expanded(
+                      child: IconButton(
+                          onPressed: null, icon: Icon(Icons.arrow_forward)))
+                ],
+              ),
             ),
             Divider(),
-            Row(
-              children: [
-                Expanded(child: Icon(Icons.location_on_outlined)),
-                Expanded(flex: 7, child: Text("My locations")),
-                Expanded(
-                    child: IconButton(
-                        onPressed: null, icon: Icon(Icons.arrow_forward)))
-              ],
+            GestureDetector(
+              child: Row(
+                children: [
+                  Expanded(child: Icon(Icons.location_on_outlined)),
+                  Expanded(flex: 7, child: Text("My locations")),
+                  Expanded(
+                      child: IconButton(
+                          onPressed: null, icon: Icon(Icons.arrow_forward)))
+                ],
+              ),
             ),
             Divider(),
-            Row(
-              children: [
-                Expanded(child: Icon(Icons.shopping_bag_outlined)),
-                Expanded(flex: 7, child: Text("My orders")),
-                Expanded(
-                    child: IconButton(
-                        onPressed: null, icon: Icon(Icons.arrow_forward)))
-              ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyOrders(),
+                  ),
+                );
+              },
+              child: Row(
+                children: [
+                  Expanded(child: Icon(Icons.shopping_bag_outlined)),
+                  Expanded(flex: 7, child: Text("My orders")),
+                  Expanded(
+                      child: IconButton(
+                          onPressed: null, icon: Icon(Icons.arrow_forward)))
+                ],
+              ),
             ),
             Divider(),
-            Row(
-              children: [
-                Expanded(child: Icon(Icons.payment_outlined)),
-                Expanded(flex: 7, child: Text("Payment Methods")),
-                Expanded(
-                    child: IconButton(
-                        onPressed: null, icon: Icon(Icons.arrow_forward)))
-              ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentMethod(),
+                  ),
+                );
+              },
+              child: Row(
+                children: [
+                  Expanded(child: Icon(Icons.payment_outlined)),
+                  Expanded(flex: 7, child: Text("Payment Methods")),
+                  Expanded(
+                      child: IconButton(
+                          onPressed: null, icon: Icon(Icons.arrow_forward)))
+                ],
+              ),
             ),
             Divider(),
-            Row(
-              children: [
-                Expanded(child: Icon(Icons.star_border_outlined)),
-                Expanded(flex: 7, child: Text("My reviews")),
-                Expanded(
-                    child: IconButton(
-                        onPressed: null, icon: Icon(Icons.arrow_forward)))
-              ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyReviews(),
+                  ),
+                );
+              },
+              child: Row(
+                children: [
+                  Expanded(child: Icon(Icons.star_border_outlined)),
+                  Expanded(flex: 7, child: Text("My reviews")),
+                  Expanded(
+                      child: IconButton(
+                          onPressed: null, icon: Icon(Icons.arrow_forward)))
+                ],
+              ),
             ),
             Divider(),
             SizedBox(
