@@ -88,7 +88,6 @@ class _ExploreState extends State<Explore> {
             Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Image(
-                  // width: 400,
                   image: AssetImage('assets/home_screen/IcecreamBanner.png'),
                   fit: BoxFit.fill,
                   filterQuality: FilterQuality.high,
@@ -194,7 +193,7 @@ class _ExploreState extends State<Explore> {
                     children: [
                       Stack(children: [
                         Image(
-                          image: AssetImage('assets/home_screen/Deal2.png'),
+                          image: AssetImage('assets/home_screen/Rice.png'),
                           fit: BoxFit.fill,
                           filterQuality: FilterQuality.high,
                           width: !isPortrait ? width * 0.91 : width * 0.85,

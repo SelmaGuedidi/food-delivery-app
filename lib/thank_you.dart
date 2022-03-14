@@ -20,7 +20,7 @@ class ThankYou extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               const Text(
-                  "Well get to you as soon as \n                possible"),
+                  "We'll get to you as soon as \n                possible"),
               const SizedBox(height: 30),
               const Image(
                   image: AssetImage("assets/thank_you_screen/OnTheWay.png")),
