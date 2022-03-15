@@ -2,7 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/Notifications.dart';
 import 'package:fooddelivery/cart.dart';
-import 'package:fooddelivery/explore.dart';
+import 'package:fooddelivery/explore/explore.dart';
 import 'package:fooddelivery/profile.dart';
 import 'package:fooddelivery/saved.dart';
 

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/food_variation.dart';
+import 'package:fooddelivery/models/deal.dart';
 
-class FoodMenu extends StatelessWidget {
+class FoodMenu extends StatefulWidget {
+
+  final Deal deal;
+
+  const FoodMenu({Key? key,required this.deal}) : super(key: key);
+
+  @override
+  State<FoodMenu> createState() => _FoodMenuState();
+}
+
+class _FoodMenuState extends State<FoodMenu> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -9,23 +20,48 @@ class FoodMenu extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          toolbarHeight: 180,
-          elevation: 0,
-          flexibleSpace: const Image(
-            image: AssetImage('assets/food_menu_screen/food_menu.png'),
-            fit: BoxFit.fill,
-            height: double.infinity,
-          ),
-          automaticallyImplyLeading: false,
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  IconButton(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(180),
+
+        child: Stack(
+
+          children: [
+
+
+            Center(
+              child: Image(
+                image: NetworkImage(widget.deal.image),
+                fit: BoxFit.fill,
+                height: double.infinity,
+                width: double.infinity,
+              ),
+            ),
+
+            Container(
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: FractionalOffset.center,
+                      end: FractionalOffset.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black,
+                      ],
+                      stops: [
+                        0.25,
+                        1.0
+                      ])),
+            ),
+
+
+            Column(
+
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  leading:   IconButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -33,32 +69,71 @@ class FoodMenu extends StatelessWidget {
                         Icons.arrow_back_sharp,
                         color: Colors.white,
                       )),
-                  const Spacer(),
-                  const IconButton(
-                      onPressed: null,
-                      icon: Icon(
-                        Icons.favorite_outline_outlined,
-                        color: Colors.white,
-                      )),
-                  const IconButton(
-                      onPressed: null,
-                      icon: Icon(
-                        Icons.share_outlined,
-                        color: Colors.white,
-                      )),
-                  const IconButton(
-                      onPressed: null,
-                      icon: Icon(
-                        Icons.more_vert,
-                        color: Colors.white,
-                      )),
-                ],
-              ),
-              const SizedBox(
-                height: 150,
-              )
-            ],
-          )),
+                  actions: [
+
+
+                    IconButton(
+                        onPressed: (){
+                          setState(() {
+                            widget.deal.isSaved=!widget.deal.isSaved;
+                          });
+                        },
+                        icon: Icon(
+                          widget.deal.isSaved?Icons.favorite :Icons.favorite_outline_outlined,
+                          color: widget.deal.isSaved? Colors.red:Colors.white,
+                        )),
+                    const IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.share_outlined,
+                          color: Colors.white,
+                        )),
+                    const  IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: Colors.white,
+                        )),
+
+
+                  ],
+                  automaticallyImplyLeading: false,
+                ),
+                const Spacer(),
+
+
+                Padding(padding: EdgeInsets.only(top: 20,bottom: 5,left: 20,right: 20),
+
+                child: Text(widget.deal.title,
+
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    color: Colors.white
+                  ),),
+                ),
+
+                Padding(padding: EdgeInsets.only(bottom: 10,left: 20,right: 20),
+
+                  child: Text(widget.deal.place,
+
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white
+
+                    ),),
+                ),
+
+              ],
+            ),
+
+
+
+          ],
+
+        ),
+      ),
       body: ListView(children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +150,7 @@ class FoodMenu extends StatelessWidget {
                     children: [
                       Icon(Icons.star_border_outlined),
                       Text(
-                        '4.8',
+                        widget.deal.rate.toString(),
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w400),
                       )
@@ -85,7 +160,7 @@ class FoodMenu extends StatelessWidget {
                       child: Column(
                     children: [
                       Icon(Icons.access_time_outlined),
-                      Text('40 min',
+                      Text(widget.deal.duration,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400))
                     ],
@@ -96,7 +171,7 @@ class FoodMenu extends StatelessWidget {
                       Icon(
                         Icons.location_on_outlined,
                       ),
-                      Text('1.4 km',
+                      Text(widget.deal.distance,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400)),
                     ],
