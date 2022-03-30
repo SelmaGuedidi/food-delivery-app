@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/account.dart';
-import 'package:fooddelivery/my_orders.dart';
+import 'package:fooddelivery/location.dart';
+import 'package:fooddelivery/login.dart';
+import 'package:fooddelivery/orders/my_orders.dart';
 import 'package:fooddelivery/my_reviews.dart';
 import 'package:fooddelivery/payment_method.dart';
 
@@ -66,7 +69,15 @@ class _ProfileState extends State<Profile> {
                   Expanded(flex: 7, child: Text("My locations")),
                   Expanded(
                       child: IconButton(
-                          onPressed: null, icon: Icon(Icons.arrow_forward)))
+                          onPressed: (() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Location(),
+                              ),
+                            );
+                          }),
+                          icon: Icon(Icons.arrow_forward)))
                 ],
               ),
             ),
@@ -159,6 +170,29 @@ class _ProfileState extends State<Profile> {
                     child: IconButton(
                         onPressed: null, icon: Icon(Icons.arrow_forward)))
               ],
+            ),
+            Divider(),
+            GestureDetector(
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => login()),
+                  (Route<dynamic> route) => false,
+                );
+              },
+              child: Row(
+                children: [
+                  Expanded(child: Icon(Icons.logout_outlined)),
+                  Expanded(flex: 7, child: Text("Sign out")),
+                  Expanded(
+                      child: IconButton(
+                          onPressed: (() {
+                            FirebaseAuth.instance.signOut();
+                          }),
+                          icon: Icon(Icons.arrow_forward)))
+                ],
+              ),
             ),
             Divider(),
             SizedBox(

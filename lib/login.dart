@@ -1,8 +1,18 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fooddelivery/create_an_account.dart';
+import 'package:fooddelivery/home.dart';
 import 'package:fooddelivery/login_via_email.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: <String>['email'],
+);
 
 class login extends StatelessWidget {
+  GoogleSignInAccount? user = _googleSignIn.currentUser;
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -22,7 +32,19 @@ class login extends StatelessWidget {
             padding: const EdgeInsets.only(
                 right: 30.0, left: 30.00, bottom: 15.00, top: 30),
             child: MaterialButton(
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    await _googleSignIn.signIn().then((value) {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                        (Route<dynamic> route) => false,
+                      );
+                    });
+                  } catch (e) {
+                    print("erreur");
+                  }
+                },
                 color: Colors.red,
                 padding: const EdgeInsets.all(10.0),
                 shape: RoundedRectangleBorder(

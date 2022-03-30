@@ -1,7 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:fooddelivery/models/product.dart';
+import 'package:fooddelivery/models/restaurant.dart';
 
 enum Number { eight, ten, twelve }
 

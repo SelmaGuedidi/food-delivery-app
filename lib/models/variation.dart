@@ -1,7 +1,7 @@
-class Variantion{
+class Variation {
   final int id;
   final String title;
   final num price;
 
-  Variantion(this.id, this.title, this.price);
+  Variation(this.id, this.title, this.price);
 }

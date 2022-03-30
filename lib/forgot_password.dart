@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -36,6 +38,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   padding: const EdgeInsets.only(
                       right: 30.0, left: 30.00, bottom: 15.00),
                   child: TextFormField(
+                      controller: emailController,
                       textInputAction: TextInputAction.done,
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -56,10 +59,35 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               padding: const EdgeInsets.only(
                   right: 30.0, left: 30.00, bottom: 15.00, top: 30),
               child: MaterialButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     print("Email: " + emailController.text);
+                    try {
+                      await FirebaseAuth.instance
+                          .sendPasswordResetEmail(email: emailController.text);
+
+                      Fluttertoast.showToast(
+                          msg: "Check your email to change your password",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.green,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    } catch (e) {
+                      if (e is FirebaseAuthException) {
+                        Fluttertoast.showToast(
+                            msg: e.message ?? "Unknown error",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.redAccent,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }
+                    }
                   }
+                
                 },
                 color: const Color.fromRGBO(240, 81, 147, 1),
                 padding: const EdgeInsets.all(10.0),

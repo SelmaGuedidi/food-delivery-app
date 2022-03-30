@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:fooddelivery/models/order_item.dart';
+import 'package:fooddelivery/orders/order_item_card.dart';
 
-class DailyDeli extends StatefulWidget {
-  const DailyDeli({Key? key}) : super(key: key);
+class OrderSummary extends StatelessWidget {
+  final String title;
+  final String date;
+  OrderSummary({Key? key, required this.title, required this.date})
+      : super(key: key);
+  List<OrderItem> orderItems = [
+    OrderItem(1, "Chicken Fajita Pizza", '\$20'),
+    OrderItem(3, "Chicken Wrap Deluxe", '\$30'),
+  ];
 
-  @override
-  State<DailyDeli> createState() => _DailyDeliState();
-}
-
-class _DailyDeliState extends State<DailyDeli> {
-  bool showBack = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black),
           title: Row(children: [
-            Text('Daily Deli', style: TextStyle(color: Colors.black)),
+            Text(title, style: TextStyle(color: Colors.black)),
             Spacer(),
-            Text('23 Jun, 2020',
-                style: TextStyle(color: Colors.grey, fontSize: 17))
+            Text(date, style: TextStyle(color: Colors.grey, fontSize: 17))
           ]),
           toolbarHeight: 70,
           backgroundColor: Colors.white,
@@ -30,36 +32,10 @@ class _DailyDeliState extends State<DailyDeli> {
               child: Text('Order Summary',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25))),
           Divider(),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, top: 20),
-            child: Row(children: [
-              Expanded(
-                flex: 7,
-                child: Text('1x Chicken Fajita Pizza',
-                    style: TextStyle(fontSize: 17)),
-              ),
-              Expanded(
-                child: Text('\$20',
-                    style: TextStyle(color: Colors.grey, fontSize: 17)),
-              )
-            ]),
+          Column(
+            children: List.generate(orderItems.length,
+                (index) => OrderItemCard(orderItem: orderItems[index])),
           ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, top: 20),
-            child: Row(children: [
-              Expanded(
-                flex: 7,
-                child: Text('3x Chicken Wrap Deluxe',
-                    style: TextStyle(fontSize: 17)),
-              ),
-              Expanded(
-                child: Text('\$30',
-                    style: TextStyle(color: Colors.grey, fontSize: 17)),
-              )
-            ]),
-          ),
-          Divider(),
           Padding(
             padding: const EdgeInsets.only(left: 30, top: 20),
             child: Row(children: [
@@ -157,22 +133,15 @@ class _DailyDeliState extends State<DailyDeli> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                     SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          showBack = !showBack;
-                        });
-                      },
-                      child: CreditCardWidget(
-                        cardNumber: '1234123412344871',
-                        cardHolderName: 'John Doe',
-                        cvvCode: '123',
-                        expiryDate: '02/2023',
-                        showBackView: showBack,
-                        obscureCardNumber: true,
-                        obscureCardCvv: true,
-                        onCreditCardWidgetChange: (CreditCardBrand) {},
-                      ),
+                    CreditCardWidget(
+                      cardNumber: '1234123412344871',
+                      cardHolderName: 'John Doe',
+                      cvvCode: '123',
+                      expiryDate: '02/2023',
+                      showBackView: false,
+                      obscureCardNumber: true,
+                      obscureCardCvv: true,
+                      onCreditCardWidgetChange: (CreditCardBrand) {},
                     ),
                   ])),
           Padding(

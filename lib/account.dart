@@ -53,6 +53,7 @@ class _AccountState extends State<Account> {
                         right: 30.0, left: 30.00, bottom: 15.00),
                     child: Column(children: [
                       TextFormField(
+                          controller: nameController,
                           keyboardType: TextInputType.name,
                           textInputAction: TextInputAction.next,
                           validator: (value) {
@@ -69,6 +70,7 @@ class _AccountState extends State<Account> {
                                   borderRadius: BorderRadius.circular(18.0)))),
                       const SizedBox(height: 20),
                       TextFormField(
+                          controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
                           validator: (value) {
@@ -85,6 +87,7 @@ class _AccountState extends State<Account> {
                                   borderRadius: BorderRadius.circular(18.0)))),
                       const SizedBox(height: 20),
                       TextFormField(
+                          controller: phoneNumberController,
                           keyboardType: TextInputType.phone,
                           textInputAction: TextInputAction.next,
                           validator: (value) {
@@ -101,6 +104,7 @@ class _AccountState extends State<Account> {
                                   borderRadius: BorderRadius.circular(18.0)))),
                       const SizedBox(height: 20),
                       TextFormField(
+                          controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
                           validator: (value) {

@@ -1,4 +1,7 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:fooddelivery/create_an_account.dart';
 import 'package:fooddelivery/forgot_password.dart';
 import 'package:fooddelivery/home.dart';
@@ -12,10 +15,50 @@ class LoginViaEmail extends StatefulWidget {
 
 class LoginViaEmailState extends State<LoginViaEmail> {
   final _formKey = GlobalKey<FormState>();
-
+  bool isLoading = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool visiblePassword = false;
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  Future<void> submit() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      try {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text)
+            .then((value) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+            (Route<dynamic> route) => false,
+          );
+        });
+      } catch (e) {
+        if (e is FirebaseAuthException) {
+          Fluttertoast.showToast(
+              msg: e.message ?? "Unknown error",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.redAccent,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      }
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +93,8 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.emailAddress,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
+                              if (!EmailValidator.validate(value!) ||
+                                  value.isEmpty) {
                                 return "Invalid email";
                               } else {
                                 return null;
@@ -110,28 +154,27 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                       ]))
                 ])),
             Padding(
-                padding: const EdgeInsets.only(
-                    right: 30.0, left: 30.00, bottom: 15.00),
-                child: MaterialButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      print("Email: " + emailController.text);
-                      print("Password: " + passwordController.text);
-                    }
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (Context) => Home(),
-                        ));
-                  },
-                  color: const Color.fromRGBO(240, 81, 147, 1),
-                  padding: const EdgeInsets.all(10.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0)),
-                  height: 55,
-                  child: const Text('Login',
-                      style: TextStyle(color: Colors.white)),
-                )),
+              padding: const EdgeInsets.only(
+                  right: 30.0, left: 30.00, bottom: 15.00),
+              child: MaterialButton(
+                onPressed: isLoading
+                    ? null
+                    : () {
+                        submit();
+                      },
+                color: const Color.fromRGBO(240, 81, 147, 1),
+                padding: const EdgeInsets.all(10.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0)),
+                height: 55,
+                child: isLoading
+                    ? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                        strokeWidth: 3,
+                      )
+                    : Text('Login', style: TextStyle(color: Colors.white)),
+              ),
+            ),
             Padding(
                 padding: const EdgeInsets.only(
                     right: 30.0, left: 30.00, bottom: 15.00),
@@ -140,7 +183,7 @@ class LoginViaEmailState extends State<LoginViaEmail> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (Context) => CreateAnAccount(),
+                        builder: (context) => CreateAnAccount(),
                       ),
                     );
                   },

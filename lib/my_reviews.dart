@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fooddelivery/explore/deal_card.dart';
+import 'package:fooddelivery/models/deal.dart';
 
 class MyReviews extends StatefulWidget {
   const MyReviews({Key? key}) : super(key: key);
@@ -8,8 +10,22 @@ class MyReviews extends StatefulWidget {
 }
 
 class _MyReviewsState extends State<MyReviews> {
-  bool isSaved1 = false;
-  bool isSaved2 = false;
+  List<Deal> deals = [
+    Deal.second(
+      0,
+      "Daily Deli",
+      false,
+      "Johar Town",
+      'https://www.vegrecipesofindia.com/wp-content/uploads/2020/11/pizza-recipe-2-500x375.jpg',
+    ),
+    Deal.second(
+      1,
+      "Rice Bowl",
+      false,
+      "Wapda Town",
+      'https://img.taste.com.au/Ssi-Eelu/taste/2018/02/mar-18_cajun-chicken-rice-bowl-3000x2000-135698-1.jpg',
+    )
+  ];
   bool star1 = false;
   bool star2 = false;
   bool star3 = false;
@@ -17,10 +33,6 @@ class _MyReviewsState extends State<MyReviews> {
   bool star5 = false;
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
@@ -30,126 +42,23 @@ class _MyReviewsState extends State<MyReviews> {
         backgroundColor: Colors.white,
       ),
       body: ListView(
-        padding: const EdgeInsets.only(top: 30),
         children: [
-          SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                Padding(
-                    padding: const EdgeInsets.only(left: 30),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(children: [
-                            Image(
-                              image: AssetImage('assets/home_screen/Deal1.png'),
-                              fit: BoxFit.fill,
-                              filterQuality: FilterQuality.high,
-                              width: !isPortrait ? width * 0.91 : width * 0.85,
-                              height: !isPortrait ? height * 0.5 : height * 0.2,
-                            ),
-                            Positioned(
-                                right: 0,
-                                child: Image(
-                                  height: 48,
-                                  width: 48,
-                                  image: AssetImage(
-                                      'assets/home_screen/Ellipse.png'),
-                                )),
-                            Positioned(
-                                right: 0,
-                                child: IconButton(
-                                    icon: Icon(Icons.favorite,
-                                        size: 20,
-                                        color: isSaved1
-                                            ? Colors.red
-                                            : Colors.black),
-                                    onPressed: () {
-                                      setState(() {
-                                        isSaved1 = !isSaved1;
-                                      });
-                                    })),
-                          ]),
-                          SizedBox(height: 10),
-                          Container(
-                            width: width - 60,
-                            child: Row(children: [
-                              Text('Daily Deli',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black,
-                                      fontSize: 18)),
-                              Spacer(),
-                              //SizedBox(width: isPortrait ? 180 : 550),
-                              Icon(Icons.star, color: Colors.yellow),
-                              Text('4.8',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17))
-                            ]),
-                          ),
-                          Text(
-                            'Johar Town',
-                            style: TextStyle(fontSize: 16),
-                          )
-                        ])),
-                Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(children: [
-                            Image(
-                              image: AssetImage('assets/home_screen/Rice.png'),
-                              fit: BoxFit.fill,
-                              filterQuality: FilterQuality.high,
-                              width: !isPortrait ? width * 0.91 : width * 0.85,
-                              height: !isPortrait ? height * 0.5 : height * 0.2,
-                            ),
-                            Positioned(
-                                right: 0,
-                                child: Image(
-                                  height: 48,
-                                  width: 48,
-                                  image: AssetImage(
-                                      'assets/home_screen/Ellipse.png'),
-                                )),
-                            Positioned(
-                                right: 0,
-                                child: IconButton(
-                                    icon: Icon(Icons.favorite,
-                                        size: 20,
-                                        color: isSaved2
-                                            ? Colors.red
-                                            : Colors.black),
-                                    onPressed: () {
-                                      setState(() {
-                                        isSaved2 = !isSaved2;
-                                      });
-                                    }))
-                          ]),
-                          const SizedBox(height: 10),
-                          Container(
-                            width: width - 60,
-                            child: Row(children: [
-                              Text(
-                                'Rice Bowl',
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
-                              Spacer(),
-                              Icon(Icons.star, color: Colors.yellow),
-                              Text('4.5',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17))
-                            ]),
-                          ),
-                          const Text(
-                            'Wapda Town',
-                            style: TextStyle(fontSize: 16),
-                          )
-                        ])),
-              ])),
+          SizedBox(height: 20),
+          Container(
+            width: double.infinity,
+            child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    children: List.generate(
+                        deals.length,
+                        (index) => DealCard(
+                            deal: deals[index],
+                            onFavoriteButtonTapped: () {
+                              setState(() {
+                                deals[index].isSaved = !deals[index].isSaved;
+                              });
+                            })))),
+          ),
           Padding(
               padding: EdgeInsets.only(right: 15.0, left: 30.00, top: 10),
               child: Column(
@@ -209,7 +118,6 @@ class _MyReviewsState extends State<MyReviews> {
                     ])
                   ])),
           Divider(),
-          Container()
         ],
       ),
     );
